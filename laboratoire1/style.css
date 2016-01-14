@@ -1,0 +1,9 @@
+body {
+    text-align: center;
+}
+.menu ul {
+    padding: 0;
+}
+.menu li {
+    display: inline-block;
+}
