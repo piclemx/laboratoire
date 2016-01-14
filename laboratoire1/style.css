@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family:Sans-serif;
+    font-family: Sans-serif, serif;
     font-size:100%;
     background-color: white;
 }
@@ -19,8 +19,7 @@ h1 {
     padding:0;
     color:#fff;
     text-shadow:1px 1px 1px #aaa;
-    margin-bottom:0;
-    margin:1em;
+    margin: 1em;
 }
 h2 {
     background-color: #aaaaaa;
