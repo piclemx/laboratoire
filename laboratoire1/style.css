@@ -1,9 +1,86 @@
-body {
-    text-align: center;
-}
-.menu ul {
-    padding: 0;
-}
-.menu li {
+.title {
     display: inline-block;
+    font-size: 2em;
+    color: white;
+    font-weight: bold;
+    min-width: 230px;
+}
+.topbar {
+    background-color: black;
+}
+
+body {
+    font-family:Sans-serif;
+    font-size:100%;
+    background-color: white;
+}
+
+h1 {
+    padding:0;
+    color:#fff;
+    text-shadow:1px 1px 1px #aaa;
+    margin-bottom:0;
+    margin:1em;
+}
+h2 {
+    background-color: #aaaaaa;
+    color:#fff;
+    margin:0;
+    padding:4px;
+}
+#menu ul, #menu li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+#menu li {
+    float:left;
+    width:20%;
+    text-align:center;
+}
+#menu a {
+    display:block;
+    background:#444;
+    color:#fff;
+    border-bottom:1px;
+    text-decoration:none;
+    line-height:200%;
+    padding:0 2em;
+}
+#menu a:hover {
+    background:#222;
+}
+
+#menu {
+    width:100%;
+    overflow:auto;
+}
+
+@media screen and (min-width: 1024px) {
+    #main {
+        width:70%;
+        clear:none;
+    }
+    #aside {
+        width:30%;
+        clear:none;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #menu a {
+        display:block;
+    }
+    #menu li {
+        float:none;
+        width:100%;
+    }
+    #main, #aside, #menu {
+        clear:both;
+        width:100%;
+    }
+}
+
+.articles {
+    text-align: center;
 }
