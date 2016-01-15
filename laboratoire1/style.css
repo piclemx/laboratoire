@@ -5,6 +5,9 @@
     font-weight: bold;
     min-width: 230px;
 }
+.description {
+    text-align: justify;
+}
 .topbar {
     background-color: black;
 }
@@ -27,19 +30,21 @@ h2 {
     margin:0;
     padding:4px;
 }
+#menu {
+    background:#444;
+}
 #menu ul, #menu li {
     list-style-type:none;
     margin:0;
     padding:0;
 }
+
 #menu li {
     float:left;
-    width:20%;
     text-align:center;
 }
 #menu a {
     display:block;
-    background:#444;
     color:#fff;
     border-bottom:1px;
     text-decoration:none;
@@ -76,6 +81,12 @@ h2 {
     }
     #main, #aside, #menu {
         clear:both;
+        width:100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    img {
         width:100%;
     }
 }
