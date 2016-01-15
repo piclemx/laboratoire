@@ -30,6 +30,13 @@ h2 {
     margin:0;
     padding:4px;
 }
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+footer > button {
+    width: 200px;
+}
 #menu {
     background:#444;
 }
@@ -82,6 +89,9 @@ h2 {
     #main, #aside, #menu {
         clear:both;
         width:100%;
+    }
+    footer > button {
+        width: 100%;
     }
 }
 
