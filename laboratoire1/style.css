@@ -5,12 +5,15 @@
     font-weight: bold;
     min-width: 230px;
 }
+.description {
+    text-align: justify;
+}
 .topbar {
     background-color: black;
 }
 
 body {
-    font-family:Sans-serif;
+    font-family: Sans-serif, serif;
     font-size:100%;
     background-color: white;
 }
@@ -19,8 +22,7 @@ h1 {
     padding:0;
     color:#fff;
     text-shadow:1px 1px 1px #aaa;
-    margin-bottom:0;
-    margin:1em;
+    margin: 1em;
 }
 h2 {
     background-color: #aaaaaa;
@@ -28,19 +30,28 @@ h2 {
     margin:0;
     padding:4px;
 }
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+footer > button {
+    width: 200px;
+}
+#menu {
+    background:#444;
+}
 #menu ul, #menu li {
     list-style-type:none;
     margin:0;
     padding:0;
 }
+
 #menu li {
     float:left;
-    width:20%;
     text-align:center;
 }
 #menu a {
     display:block;
-    background:#444;
     color:#fff;
     border-bottom:1px;
     text-decoration:none;
@@ -77,6 +88,15 @@ h2 {
     }
     #main, #aside, #menu {
         clear:both;
+        width:100%;
+    }
+    footer > button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    img {
         width:100%;
     }
 }
