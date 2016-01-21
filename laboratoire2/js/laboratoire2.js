@@ -1,7 +1,10 @@
+// @Review tout ce qui a dans le onload mettre dans un <script> avant </body>
 window.onload = function () {
     var mySlider = new awesomeSlider('slider');
     var next = document.getElementById('next');
     var prev = document.getElementById('prev');
+
+    // @Review Mauvaise gestions des bullets, ce doit être généré par le javascript et non mis manuellement
     var firstBullet = document.getElementById('bullets-1');
     var secondBullet = document.getElementById('bullets-2');
     var thirdBullet = document.getElementById('bullets-3');
@@ -17,6 +20,7 @@ window.onload = function () {
         mySlider.showNextItem();
     }, 2000);
 
+    // @Review Mauvaise gestions des event des bullets, ce doit être généré par le javascript et non mis manuellement
     firstBullet.addEventListener('click', function () {
         mySlider.selectCurrentImg(1,this);
     });
