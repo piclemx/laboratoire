@@ -13,6 +13,10 @@ window.onload = function () {
         mySlider.showPrevItem();
     });
 
+    setInterval(function() {
+        mySlider.showNextItem();
+    }, 2000);
+
     firstBullet.addEventListener('click', function () {
         mySlider.selectCurrentImg(1,this);
     });
@@ -65,13 +69,13 @@ function awesomeSlider(classSlider) {
         nextItem.classList.add('active');
     };
 
-    this.changeActiveItemTo = function(nextItem) {
+    this.changeActiveItemTo = function(index) {
         var activeItem = this.slider.getElementsByClassName('active')[0];
         activeItem.classList.add('fade-out');
 
         var that = this;
         setTimeout(function() {
-            that.animateSlider(activeItem, nextItem);
+            that.animateSlider(activeItem, index);
         }, 600);
     };
 
