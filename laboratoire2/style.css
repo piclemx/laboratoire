@@ -28,3 +28,20 @@ ul .fade-out {
 
     opacity: 0;
 }
+
+.slider-bullets div {
+    border: none;
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background-color: #CCCCCC;
+    font-size: 0;
+    margin: 2px 9px;
+    cursor: pointer;
+    border-radius: 11px;
+    box-shadow: inset 0 1px 3px #666666;
+}
+
+.active-bullet {
+    background-color: #53868b;
+}

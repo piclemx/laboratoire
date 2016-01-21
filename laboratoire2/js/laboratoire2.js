@@ -2,6 +2,9 @@ window.onload = function () {
     var mySlider = new awesomeSlider('slider');
     var next = document.getElementById('next');
     var prev = document.getElementById('prev');
+    var firstBullet = document.getElementById('bullets-1');
+    var secondBullet = document.getElementById('bullets-2');
+    var thirdBullet = document.getElementById('bullets-3');
 
     next.addEventListener('click', function() {
         mySlider.showNextItem();
@@ -9,7 +12,19 @@ window.onload = function () {
     prev.addEventListener('click', function() {
         mySlider.showPrevItem();
     });
-}
+
+    firstBullet.addEventListener('click', function () {
+        mySlider.selectCurrentImg(1,this);
+    });
+
+    secondBullet.addEventListener('click', function () {
+        mySlider.selectCurrentImg(2, this);
+    });
+
+    thirdBullet.addEventListener('click', function() {
+       mySlider.selectCurrentImg(3, this);
+    })
+};
 
 function awesomeSlider(classSlider) {
     this.slider = document.getElementsByClassName(classSlider)[0];
@@ -58,6 +73,13 @@ function awesomeSlider(classSlider) {
         setTimeout(function() {
             that.animateSlider(activeItem, nextItem);
         }, 600);
+    };
+
+
+    this.selectCurrentImg = function(item, bullets) {
+        var nextItem = this.slider.getElementsByClassName('item')[item - 1];
+        bullets.classList.add('active-bullet');
+        this.changeActiveItemTo(nextItem);
     };
 
 
