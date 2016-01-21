@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+ul {
+    width: 800px;
+    margin: auto;
+    list-style-type: none;
+    overflow: hidden;
+}
+ul li {
+    display:inline;
+    float:left;
+}
+ul .item {
+    display: none;
+    position: relative;
+}
+ul .active {
+    opacity: 1;
+    display: inline;
+}
+ul .fade-out {
+    -webkit-transition: 0.6s ease-in-out opacity;
+    -moz-transition: 0.6s ease-in-out opacity;
+    -o-transition: 0.6s ease-in-out opacity;
+    transition: 0.6s ease-in-out opacity;
+
+    opacity: 0;
+}
