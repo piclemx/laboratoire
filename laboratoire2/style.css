@@ -29,12 +29,15 @@ ul .fade-out {
     opacity: 0;
 }
 
+.slider-bullets {
+    text-align: center;
+}
+
 .slider-bullets div {
     border: none;
     display: inline-block;
     width: 11px;
     height: 11px;
-    background-color: #CCCCCC;
     font-size: 0;
     margin: 2px 9px;
     cursor: pointer;
@@ -43,5 +46,5 @@ ul .fade-out {
 }
 
 .active-bullet {
-    background-color: #53868b;
+    background-color: red;
 }

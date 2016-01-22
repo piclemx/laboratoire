@@ -2,36 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Awesome-slider!</title>
+    <title>Laboratoire 2</title>
 
     <link rel="stylesheet" href="style.css">
     <script src="js/laboratoire2.js"></script>
 </head>
-
-
 <body>
+    <div class="container">
+        <ul class="slider">
+            <li class="item active" value="1">
+                <img id="img-1" src="http://baconmockup.com/800/300" width="800px" height="300px" />
+            </li>
+            <li class="item" value="2">
+                <img id="img-2" src="http://baconmockup.com/800/301" width="800px" height="300px" />
+            </li>
+            <li class="item" value="3">
+                <img id="img-3" src="http://baconmockup.com/800/302" width="800px" height="300px" />
+            </li>
+        </ul>
 
-<div class="container">
-    <ul class="slider">
-        <li class="item active">
-            <img id="img-1" src="http://baconmockup.com/800/300" width="800px" height="300px">
-        </li>
-        <li class="item">
-            <img id="img-2" src="http://baconmockup.com/800/301" width="800px" height="300px">
-        </li>
-        <li class="item">
-            <img id="img-3" src="http://baconmockup.com/800/302" width="800px" height="300px">
-        </li>
-    </ul>
-    <button id="prev"><</button>
-    <button id="next">></button>
-    <div class="slider-bullets">
-        <div id="bullets-1" ></div>
-        <div id="bullets-2" ></div>
-        <div id="bullets-3" ></div>
+        <div class="slider-bullets">
+            <button id="prev"><</button>
+            <div id="bullets-1" class="bullet active-bullet"></div>
+            <div id="bullets-2" class="bullet"></div>
+            <div id="bullets-3" class="bullet"></div>
+            <button id="next">></button>
+        </div>
     </div>
-
-</div>
-
 </body>
 </html>
