@@ -18,7 +18,7 @@ window.onload = function () {
 
     setInterval(function() {
         mySlider.showNextItem();
-    }, 2000);
+    }, 6000);
 
     // @Review Mauvaise gestions des event des bullets, ce doit être généré par le javascript et non mis manuellement
     firstBullet.addEventListener('click', function () {
@@ -68,6 +68,8 @@ function awesomeSlider(classSlider) {
     };
 
     this.animateSlider = function(activeItem, nextItem) {
+        document.getElementsByClassName('bullet')[activeItem.value - 1].classList.remove('active-bullet');
+        document.getElementsByClassName('bullet')[nextItem.value - 1].classList.add('active-bullet');
         activeItem.classList.remove('active');
         activeItem.classList.remove('fade-out');
         nextItem.classList.add('active');
@@ -83,13 +85,8 @@ function awesomeSlider(classSlider) {
         }, 600);
     };
 
-
     this.selectCurrentImg = function(item, bullets) {
         var nextItem = this.slider.getElementsByClassName('item')[item - 1];
-        bullets.classList.add('active-bullet');
         this.changeActiveItemTo(nextItem);
     };
-
-
 };
-
