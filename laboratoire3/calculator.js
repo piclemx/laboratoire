@@ -1,4 +1,4 @@
-var calculator = function() {
+var Calculator = function() {
     this.result = null;
     this.memory = null;
 
