@@ -48,6 +48,11 @@ $(document).ready(function () {
         display.val(calculator.getEquation());
     });
 
+    $(".function-button.factorial").click(function () {
+        calculator.factorial();
+        display.val(calculator.getEquation());
+    });
+
     $(".memory-button.clear").click(function () {
         calculator.clearMemory();
     });

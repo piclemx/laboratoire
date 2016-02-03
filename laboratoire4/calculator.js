@@ -28,7 +28,11 @@ var Calculator = function () {
     // Sera utile pour lorsque cette classe sera connectée au UI
     this.value = function(value) {
         if(typeof value !== 'undefined'){
-            temp += parseFloat(value);
+            if (value !== '.') {
+                temp += parseFloat(value);
+            } else {
+                temp += '.';
+            }
         }
         return this;
     };
@@ -82,6 +86,12 @@ var Calculator = function () {
         return this;
     };
 
+    this.factorial = function() {
+        equation += 'Math.factorial(' + temp + ')';
+        temp = '';
+        return this;
+    };
+
     this.clearMemory = function() {
         memory = 0;
     };
@@ -96,15 +106,6 @@ var Calculator = function () {
 
     this.getEquation = function() {
         return equation;
-    };
-
-    this.factorial = function(value) {
-        if(typeof value === 'undefined'){
-            equation = 'Math.factorial(' + this.equals() + ')'
-        } else {
-            equation += 'Math.factorial(' + parseFloat(value) + ')'
-        }
-        return this;
     };
 
     this.equals = function () {
