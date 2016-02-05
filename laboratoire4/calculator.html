@@ -11,40 +11,57 @@
 <body>
 <div id="calculator">
 
-    <input type="text" id="display"/>
 
-    <a class="memory-button clear" href="#">MC</a>
-    <a class="memory-button recall" href="#">MR</a>
-    <a class="memory-button store" href="#">MS</a>
+    <div id="coords">
+        <label for="displayLatitude">Latitude</label>
+        <input type="text" id="displayLatitude"  disabled="disabled"/>
+        <label for="displayLongitude">Longitude</label>
+        <input type="text" id="displayLongitude" disabled="disabled"/>
+    </div>
 
-    <a class="num-button" href="#">7</a>
-    <a class="num-button" href="#">8</a>
-    <a class="num-button" href="#">9</a>
+    <div id="field-calculator">
+        <input type="text" id="display" disabled="disabled" />
+        <div>
+            <a class="memory-button clear likeabutton" href="#">MC</a>
+            <a class="memory-button recall likeabutton" href="#">MR</a>
+            <a class="memory-button store likeabutton" href="#">MS</a>
+            <a class="function-button add likeabutton" href="#">+</a>
+        </div>
 
-    <a class="num-button" href="#">4</a>
-    <a class="num-button" href="#">5</a>
-    <a class="num-button" href="#">6</a>
+        <div>
+            <a class="num-button likeabutton" href="#">7</a>
+            <a class="num-button likeabutton" href="#">8</a>
+            <a class="num-button likeabutton" href="#">9</a>
+            <a class="function-button subtract likeabutton" href="#">-</a>
+        </div>
 
-    <a class="num-button" href="#">1</a>
-    <a class="num-button" href="#">2</a>
-    <a class="num-button" href="#">3</a>
+        <div>
+            <a class="num-button likeabutton" href="#">4</a>
+            <a class="num-button likeabutton" href="#">5</a>
+            <a class="num-button likeabutton" href="#">6</a>
+            <a class="function-button multiply likeabutton" href="#">*</a>
+        </div>
 
-    <a class="num-button" href="#">0</a>
-    <a class="num-button dot" href="#">.</a>
-    <a class="clear-button clear" href="#">C</a>
+        <div>
+            <a class="num-button likeabutton" href="#">1</a>
+            <a class="num-button likeabutton" href="#">2</a>
+            <a class="num-button likeabutton" href="#">3</a>
+            <a class="function-button divide likeabutton" href="#">/</a>
+        </div>
 
-    <a class="function-button add" href="#">+</a>
-    <a class="function-button subtract" href="#">-</a>
-    <a class="function-button multiply" href="#">*</a>
-    <a class="function-button divide" href="#">/</a>
-
-    <a class="function-button sin" href="#">sin</a>
-    <a class="function-button cos" href="#">cos</a>
-    <a class="function-button tan" href="#">tan</a>
-    <a class="function-button factorial" href="#">!</a>
-
-    <a class="equals-button" href="#">=</a>
-
+        <div>
+            <a class="num-button likeabutton" href="#">0</a>
+            <a class="num-button dot likeabutton" href="#">.</a>
+            <a class="clear-button clear likeabutton" href="#">C</a>
+            <a class="function-button factorial likeabutton" href="#">!</a>
+        </div>
+        <div>
+            <a class="function-button sin likeabutton" href="#">sin</a>
+            <a class="function-button cos likeabutton" href="#">cos</a>
+            <a class="function-button tan likeabutton" href="#">tan</a>
+            <a class="equals-button likeabutton" href="#">=</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
