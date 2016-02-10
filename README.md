@@ -12,3 +12,8 @@ Ce qui est à réaliser : Coder un ‘carousel’ en Javascript pur, sans aucune
 Vous familiariser avec le Javascript, orienté
 objet.Coder une calculatrice en JavaScript orienté objet, sans aucun UI pour l’instant.
 
+## laboratoire 4 (jQuery)
+Vous familiariser avec le framework jQuery.Coder une interface utilisant jQuery et le corrigé du laboratoire #3 (calculatrice).
+
+## laboratoire 5 (REST)
+Vous familiariser avec le style architectural REST. Réaliser une application ‘pense-bête’ utilisant une API de type REST.
