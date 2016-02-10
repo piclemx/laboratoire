@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#results').hide();
+    getTasks()
     $('#get-tasks').unbind().click(getTasks);
     $('#task-modal').on('show.bs.modal', function (event) {
         showModal(event);
@@ -8,8 +8,9 @@ $(document).ready(function () {
         showDeleteModal(event);
     })
     $('#update-task').unbind().click(updateTask);
-    $('.glyphicon .glyphicon-remove-circle').unbind().click(deleteTask);
+    $('#task-delete').unbind().click(deleteTask);
     $('#add-task').unbind().click(addTask);
+    $('#get-task-by-id').unbind().click(getTaskById);
 });
 
 
@@ -53,7 +54,8 @@ function updateTask() {
         });
         modal.modal('hide');
     }).fail(function (error) {
-        console.log(error);
+        alert("A error occur!");
+        modal.modal('hide');
     });
 }
 
@@ -68,7 +70,7 @@ function  searchById(array , searchID) {
 
 function deleteTask() {
     var modal = $('#task-delete-modal');
-    var id = modal.find('#task-id-delete');
+    var id = modal.find('#task-id-delete').val();
     $.ajax({
         url : "http://localhost:5000/tasks/" + id,
         type : "DELETE",
@@ -77,7 +79,8 @@ function deleteTask() {
        builtTasksTable(data);
         modal.modal('hide');
     }).fail(function (error) {
-        console.log(error);
+        alert("A error occur!");
+        modal.modal('hide');
     });
 
 }
@@ -127,8 +130,25 @@ function addTask() {
         contentType : "application/json"
     }).done(function (data) {
         builtTasksTable(data);
+        modal.find('#task-add-id').val("");
+        modal.find('#task-add-text').val("");
         modal.modal('hide');
     }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert("A error occur!");
+        modal.modal('hide');
+    });
+}
 
+
+function getTaskById() {
+    var id = $('#get-by-id').val();
+    $.get({
+        url : "http://localhost:5000/tasks/" + id,
+        contentType : "application/json"
+    }).done(function (data) {
+        var task = data.task;
+        $('.result').text("Task id :" + task.id + "\t Task :" + task.task + "\n");
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        $('.result').text("A error occur!");
     });
 }
