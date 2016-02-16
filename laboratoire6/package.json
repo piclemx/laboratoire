@@ -1,0 +1,16 @@
+{
+  "name": "laboratoire6",
+  "version": "0.0.0",
+  "description": "Backbone example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexandre Picard-Lemieux",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "jquery": "~2.2.0",
+    "bootstrap": "~3.3.6",
+    "backbone": "~1.2.3"
+  }
+}
