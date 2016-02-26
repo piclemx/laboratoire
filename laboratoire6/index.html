@@ -23,12 +23,14 @@
         <thead>
         <tr>
             <th>Task</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <% _.each(tasks, function(task) { %>
         <tr>
             <td><%= htmlEncode(task.get('task')) %></td>
+            <td><a class="btn" href="#/edit/<%= task.id %>">Edit</a></td>
         </tr>
         <% }); %>
         </tbody>
