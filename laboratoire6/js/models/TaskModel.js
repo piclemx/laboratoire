@@ -1,3 +1,7 @@
 var TaskModel = Backbone.Model.extend({
-    urlRoot: '/tasks'
+    urlRoot: '/tasks',
+
+    defaults: {
+        task: ''
+    }
 });

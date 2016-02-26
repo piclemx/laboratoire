@@ -5,8 +5,11 @@ var TaskListView = Backbone.View.extend({
         var tasks = new TaskCollection();
         tasks.fetch({
             success: function (tasks) {
-                var template = _.template($('#task-list-template').html(), {tasks: tasks.models});
-                that.$el.html(template);
+                console.log(tasks);
+                //var template = _.template($('#task-list-template').html(), {tasks: createdList});
+                //that.$el.html(template);
+                var template = _.template($('#task-list-template').html());
+                $('.page').html(template({tasks: tasks.models}));
             }
         })
     }
