@@ -29,15 +29,14 @@ var TaskEditView = Backbone.View.extend({
             that.task = new TaskModel({id: options.id});
             that.task.fetch({
                 success: function (task) {
-                    var template = _.template($('#edit-task-template').html(), {task: task});
-                    that.$el.html(template);
+                    var template = _.template($('#edit-task-template').html());
+                    $('.page').html(template({task: task}));
                 }
-            })
+            });
         } else {
-            var template = _.template($('#edit-task-template').html(), {task: null});
-            that.$el.html(template);
+            var template = _.template($('#edit-task-template').html());
+            $('.page').html(template({task: null}));
         }
     }
 });
 
-var taskEditView = new TaskEditView();

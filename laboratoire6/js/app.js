@@ -27,14 +27,35 @@ var Router = Backbone.Router.extend({
         "": "home",
         "edit/:id": "edit",
         "new": "edit",
+    },
+
+    home: function() {
+        var taskListView = new TaskListView();
+        this.render(taskListView, null);
+    },
+    edit: function(id) {
+        var taskEditView = new TaskEditView();
+        this.render(taskEditView, {id:id});
+    },
+    render: function (view , params) {
+        //Close the current view
+        if (this.currentView) {
+            this.currentView.remove();
+        }
+
+        //render the new view
+        if(params !== null) {
+            view.render(params);
+        } else {
+            view.render();
+        }
+
+        //Set the current view
+        this.currentView = view;
+
+        return this;
     }
 });
 var router = new Router;
-router.on('route:home', function() {
-    // render task list
-    taskListView.render();
-})
-router.on('route:edit', function(id) {
-    taskEditView.render({id: id});
-})
+
 Backbone.history.start();
