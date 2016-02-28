@@ -21,6 +21,8 @@ $.fn.serializeObject = function () {
 $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
     options.url = 'http://127.0.0.1:5000' + options.url;
 });
+var taskListView = new TaskListView();
+var taskEditView = new TaskEditView();
 
 var Router = Backbone.Router.extend({
     routes: {
@@ -30,12 +32,10 @@ var Router = Backbone.Router.extend({
     },
 
     home: function() {
-        var taskListView = new TaskListView();
-        this.render(taskListView, null);
+        taskListView.render();
     },
     edit: function(id) {
-        var taskEditView = new TaskEditView();
-        this.render(taskEditView, {id:id});
+        taskEditView.render({id:id});
     },
     render: function (view , params) {
         //Close the current view

@@ -1,5 +1,8 @@
 var TaskEditView = Backbone.View.extend({
     el: '.page',
+    initialize: function () {
+        this.template = _.template($('#edit-task-template').html());
+    },
     events: {
         'submit .edit-task-form': 'saveTask',
         'click .delete': 'deleteTask'
@@ -24,18 +27,16 @@ var TaskEditView = Backbone.View.extend({
         return false;
     },
     render: function (options) {
-        var that = this;
+        var self = this;
         if(options.id) {
-            that.task = new TaskModel({id: options.id});
-            that.task.fetch({
+            self.task = new TaskModel({id: options.id});
+            self.task.fetch({
                 success: function (task) {
-                    var template = _.template($('#edit-task-template').html());
-                    $('.page').html(template({task: task}));
+                    $(self.el).html(self.template({task: task}));
                 }
             });
         } else {
-            var template = _.template($('#edit-task-template').html());
-            $('.page').html(template({task: null}));
+            $(self.el).html(self.template({task: null}));
         }
     }
 });
