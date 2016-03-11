@@ -1,32 +1,12 @@
 $(function () {
-    var taskCollection = new TaskCollection({});
-    taskCollection.url = 'http://localhost:5000/tasks';
+    var dayCollection = new DayCollection({});
+    dayCollection.url = 'http://api.wunderground.com/api/ccf8fe1ec42afad2/forecast10day/q/Québec.json';
 
-    var taskView = new TaskView({
-        collection: taskCollection
+    var dayView = new DayView({
+        collection: dayCollection
     });
 
-    // We add `.complete` callback to render the views only after the `fetch()` is completed.
-    taskCollection.fetch().complete(function () {
-        taskView.render();
+    dayCollection.fetch().complete(function () {
+        dayView.render();
     });
-
-    // Create a new model, and set POST to respect the API.
-    $('#btn-add-task').click(function () {
-        tryPerformActionOnTask($('#task-editor').val() !== "",
-            function () {
-                taskCollection.create({
-                    task: $('#task-editor').val()
-                })
-            })
-    })
 });
-
-function tryPerformActionOnTask(validation, callback) {
-    $('#error-handler').slideUp('fast');
-    if (validation) {
-        callback();
-    } else {
-        $('#error-handler').slideDown('fast');
-    }
-}

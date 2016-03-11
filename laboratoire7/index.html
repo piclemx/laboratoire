@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Taskit!</title>
+    <title>Weather.JS</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
@@ -11,30 +11,27 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<h1 class="task-title">Task it!</h1>
-<div id="tasks-container">
-    <p id="error-handler" style="display:none;">A task should not be empty!</p>
-    <div id="task-editor-container">
-        <textarea id="task-editor" rows="4" cols="50" placeholder="Type a task here..."></textarea>
-        <button id="btn-add-task">Add</button>
-    </div>
-    <div id="tasks-list"></div>
+<h1>Weather.JS</h1>
+<div id="days-container">
+    <div id="days-list"></div>
 </div>
 
-<script id="tasks-tpl" type="text/template">
-    <% _.each(tasks, function(task){ %>
-        <div class="task">
-            <textarea class="task-content"><%= task.task %></textarea>
-            <button class="btn-save" data-id="<%= task.id %>">Save</button>
-            <button class="btn-delete" data-id="<%= task.id %>">Delete</button>
-        </div>
+<script id="days-tpl" type="text/template">
+    <% _.each(days, function(day){ %>
+    <div class="day">
+        <%= console.log(day) %>
+        <p><%= day.date.weekday %></p>
+        <img src="<%= day.icon_url %>" alt="<%= day.conditions %>"/>
+        <p>
+            <%= day.low.celsius %> / <%= day.high.celsius %>
+        </p>
+    </div>
     <% }); %>
 </script>
 
-<!-- Scripts need to be at the end for templating ! -->
-<script src="js/models/task.js"></script>
-<script src="js/collections/tasks.js"></script>
-<script src="js/views/tasks.js"></script>
+<script src="js/models/day.js"></script>
+<script src="js/collections/days.js"></script>
+<script src="js/views/days.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
