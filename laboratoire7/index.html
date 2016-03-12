@@ -19,7 +19,6 @@
 <script id="days-tpl" type="text/template">
     <% _.each(days, function(day){ %>
     <div class="day">
-        <%= console.log(day) %>
         <p><%= day.date.weekday %></p>
         <img src="<%= day.icon_url %>" alt="<%= day.conditions %>"/>
         <p>

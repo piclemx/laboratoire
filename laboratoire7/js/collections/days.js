@@ -3,6 +3,6 @@ $(function() {
         model: DayModel,
         parse: function(response) {
             return response.forecast.simpleforecast.forecastday;
-}
+        }
     });
 });

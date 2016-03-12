@@ -1,4 +1,3 @@
 (function() {
-    DayModel = Backbone.Model.extend({
-    });
+    DayModel = Backbone.Model.extend({});
 })();
