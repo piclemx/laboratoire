@@ -8,4 +8,6 @@ app.use(bodyParser.json());
 
 
 var port = process.env.PORT || 3000;
-app.listen(port);
+var server = app.listen(port, function() {
+    console.log("Running on " + port + " localhost");
+});
