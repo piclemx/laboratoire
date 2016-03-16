@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var tasks = require('./routes/tasks');
 var cors = require('cors');
+var morgan = require('morgan');
 var mongoose = require('mongoose');
 
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/labo8';
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
+app.use(morgan('dev'));
 
 app.get('/tasks', tasks.getTasks);
 app.get('/tasks/:id', tasks.getTaskById);
