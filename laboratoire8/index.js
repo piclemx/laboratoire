@@ -24,7 +24,7 @@ app.put('/tasks/:id', tasks.updateTask);
 app.delete('/tasks/:id', tasks.deleteTask);
 
 
-var port = process.env.PORT || 3000;
+var port = 5000;
 var server = app.listen(port, function() {
     console.log("Running on " + port + " localhost");
 });
