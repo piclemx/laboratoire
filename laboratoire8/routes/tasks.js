@@ -72,4 +72,4 @@ function badRequest(req, res) {
 
 function notFound(req, res) {
     res.status(404).send({ 'error': 'Not Found' });
-}
+} 
