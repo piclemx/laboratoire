@@ -1,7 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var tasks = require('./routes/tasks');
-
+var mongoose = require('mongoose');
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/labo8';
+mongoose.connect(mongoUri);
 
 var app = express();
 

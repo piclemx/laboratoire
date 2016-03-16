@@ -1,27 +1,23 @@
-var mongo = require('mongodb-wrapper');
-var db = mongo.db('localhost', 27017, 'labo8');
+var Task = require('../models/Task').model;
 var _ = require('underscore');
-db.collection('tasks');
 
 exports.getTasks = function (req, res) {
-    db.tasks.find({}).toArray(function(err, data) {
-				  if(err) {
+    Task.find({}, function(err, data) {
+				  if(!err) {
+            res.send({'tasks':data});
+          } else {
             console.log(err);
           }
-          var list = _.map(data,toJSON);
-          res.send({'tasks':list});
 		});
 };
 
 
 exports.getTaskById = function (req, res) {
-     db.tasks.find({_id:req.params.id}, function (err, task) {
+     Task.findById(req.params.id, function (err, task) {
        if(err) {
          console.log(err);
          notFound(req,res);
        }
-
-       console.log(task);
        res.send({'task' : task});
      });
 
@@ -31,25 +27,44 @@ exports.createTask = function (req,res) {
     if(typeof(req.body) === 'undefined' ) {
       badRequest(req,res);
     }
-    db.tasks.save(req.body, function(err, task) {
-      if(err) {
+    var task = new Task({task: req.body.task});
+    task.save(function(err) {
+      if(!err) {
+        res.status(201).send(task);
+      } else {
         console.log(err);
       }
-      console.log(task);
-
-      res.status(201).send(toJSON(task))  ;
-   });
+    });
 };
 
 
 exports.updateTask = function (req, res) {
-    console.log('updateTask');
-    res.send();
+  if(typeof(req.body.task) === "undefined") {
+    badRequest(req,res);
+  }
+
+   Task.findById(req.params.id , function (err, task) {
+      if(err) {
+        console.log(err);
+        notFound(req, res);
+      }
+
+      task.task = req.body.task;
+      task.save();
+
+      getTasks(req,res);
+   });
 };
 
 exports.deleteTask = function (req, res) {
-    console.log('deleteTask');
-    res.send();
+  Task.findById(req.params.id, function (err, task) {
+     if(err) {
+       notFound(req,res);
+     }
+
+     task.remove();
+     getTasks(req,res);
+  });
 };
 
 function badRequest(req, res) {
