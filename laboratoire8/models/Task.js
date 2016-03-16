@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var taskSchema = new Schema({
-  task:String
+  task: String
 });
 
 taskSchema.method('toJSON', modelHelpers.toJSON);
