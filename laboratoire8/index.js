@@ -1,13 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var tasks = require('./routes/tasks');
-var mongo = require('mongodb-wrapper');
-var db = mongo.db('localhost', 27017, 'labo8');
+
+
 var app = express();
 
-db.collection('tasks');
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
