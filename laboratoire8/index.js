@@ -30,5 +30,25 @@ app.delete('/tasks/:id', tasks.deleteTask);
 
 var port = 5000;
 var server = app.listen(port, function() {
-  console.log("Running on " + port + " localhost");
+  console.log("Running on port " + port + " localhost");
+  console.log('Hit CTRL-C to stop the server');
+});
+
+if (process.platform === 'win32') {
+  require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  }).on('SIGINT', function () {
+    process.emit('SIGINT');
+  });
+}
+
+process.on('SIGINT', function () {
+  console.log('\nServer stopped.');
+  process.exit();
+});
+
+process.on('SIGTERM', function () {
+  console.log('\nServer stopped.');
+  process.exit();
 });
