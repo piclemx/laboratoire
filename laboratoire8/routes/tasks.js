@@ -1,5 +1,4 @@
 var Task = require('../models/Task').model;
-var _ = require('underscore');
 
 exports.getTasks = function (req, res) {
     Task.find({}, function(err, data) {
@@ -52,7 +51,7 @@ exports.updateTask = function (req, res) {
       task.task = req.body.task;
       task.save();
 
-      getTasks(req,res);
+      exports.getTasks(req,res);
    });
 };
 
@@ -63,7 +62,7 @@ exports.deleteTask = function (req, res) {
      }
 
      task.remove();
-     getTasks(req,res);
+     exports.getTasks(req,res);
   });
 };
 
@@ -73,15 +72,4 @@ function badRequest(req, res) {
 
 function notFound(req, res) {
     res.status(404).send({ 'error': 'Not Found' });
-}
-
- function toJSON(obj) {
-    var objet = obj;
-
-    objet.id = objet._id;
-    delete objet._id;
-    delete objet.__v;
-    delete objet.password;
-
-    return objet;
 }
