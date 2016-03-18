@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Weather.JS</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone.js"></script>
+
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<h1>Weather.JS</h1>
+<div id="days-container">
+    <div id="days-list"></div>
+</div>
+
+<script id="days-tpl" type="text/template">
+    <% _.each(days, function(day){ %>
+    <div class="day">
+        <p><%= day.date.weekday %></p>
+        <img src="<%= day.icon_url %>" alt="<%= day.conditions %>"/>
+        <p>
+            <%= day.low.celsius %> / <%= day.high.celsius %>
+        </p>
+    </div>
+    <% }); %>
+</script>
+
+<script src="js/models/day.js"></script>
+<script src="js/collections/days.js"></script>
+<script src="js/views/days.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

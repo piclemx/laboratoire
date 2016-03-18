@@ -1,0 +1,18 @@
+{
+  "name": "laboratoire",
+  "version": "0.0.0",
+  "description": "## laboratoire 1 (HTML , CSS et Responsiveness) Familiariser avec le HTML/CSS. Ce qui est à réaliser : Un site de type 9GAG ou Tumblr (affichage de photos), portant sur le thème des CHATS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/piclemx/laboratoire.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/piclemx/laboratoire/issues"
+  }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laboratoire 5</title>
+
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<h1>Laboratoire 5</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h4>Find by ID</h4></div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label for="get-by-id" class="control-label">ID:</label>
+            <input type="text" class="form-control" id="get-by-id" >
+        </div>
+
+        <button id="get-task-by-id" class="btn btn-primary">Get task</button>
+        <div class="panel panel-footer">
+            <div class="panel-heading">Result</div>
+            <div class="panel-body">
+                <p class="result"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div>
+    <button id="get-tasks" class="btn btn-primary">Refresh tasks</button>
+    <button id="add-tasks" class="btn btn-primary" data-toggle="modal" data-target="#task-modal-add" data-action="add">Add task</button>
+</div>
+<div class="table-responsive">
+    <table id="results" class="table table-hover ">
+        <thead>
+            <tr>
+                <th>ID of task</th>
+                <th>Task</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="rows">
+
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="task-id" class="control-label">ID:</label>
+                    <input type="text" class="form-control" id="task-id" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="task-text" class="control-label">Task:</label>
+                    <textarea class="form-control" id="task-text"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="update-task" type="button" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="task-delete-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete task #</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this task?</p>
+                <input type="hidden" id="task-id-delete" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button id="task-delete" type="button" class="btn btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="task-modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add task</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="task-id" class="control-label">ID:</label>
+                    <input type="text" class="form-control" id="task-add-id">
+                </div>
+                <div class="form-group">
+                    <label for="task-text" class="control-label">Task:</label>
+                    <textarea class="form-control" id="task-add-text"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="add-task" type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
