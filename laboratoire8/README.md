@@ -1,5 +1,7 @@
 # Installation
-Pour partir le serveur faire cette commande.
+[Installer mongodb](https://docs.mongodb.org/manual/installation/) <br>
+Exécuter les commandes.
 ```bash
-  $ npm start
+  $ sudo service mongod start
+$ npm start
 ```
