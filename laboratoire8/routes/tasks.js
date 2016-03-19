@@ -50,7 +50,6 @@ exports.updateTask = function(req, res) {
 
   Task.findById(req.params.id, function(err, task) {
     if (err) {
-      console.log(err);
       notFound(req, res);
     }
 
