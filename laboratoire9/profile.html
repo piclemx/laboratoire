@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/js-cookie/src/js.cookie.js"></script>
+    <script src="https://cdn.rawgit.com/yckart/jquery.base64.js/master/jquery.base64.js"></script>
+</head>
+<body>
+
+<div id="email"></div>
+
+<script>
+    $(document).ready(function() {
+        var api = "http://127.0.0.1:5000/";
+
+        $.ajax(api + 'userprofile', {
+            type : 'GET',
+            data: {
+                'token': Cookies.get('token')
+            }
+        }).success(function(data) {
+            console.log(data);
+        }).error(function(data) {
+            console.log(data);
+        });
+    });
+</script>
+</body>
+</html>

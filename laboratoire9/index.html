@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/js-cookie/src/js.cookie.js"></script>
+    <script src="https://cdn.rawgit.com/yckart/jquery.base64.js/master/jquery.base64.js"></script>
+</head>
+<body>
+    <h1>Connexion</h1>
+
+    <form id="login">
+        <label for="username">Username</label>
+        <input type="text" id="username">
+
+        <label for="password">Password</label>
+        <input type="password" id="password">
+
+        <input type="submit" value="Connexion" id="submit">
+    </form>
+
+    <script>
+        var api = "http://127.0.0.1:5000/";
+        $('#login').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax(api + 'authorize', {
+                data: JSON.stringify({
+                    'username': $('#username').val(),
+                    'password': $.base64.encode($('#password').val())
+                }),
+                contentType : 'application/json',
+                type : 'POST'
+            }).success(function(data) {
+                Cookies.set('token', data.token);
+                window.location = 'profile.html'
+            }).error(function(data) {
+                alert("Erreur dans l'utilisation ou le mot de passe");
+            });
+        });
+    </script>
+</body>
+</html>
