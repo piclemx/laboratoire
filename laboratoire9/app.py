@@ -62,9 +62,7 @@ def authorize():
     for user in users:
         if user['username'] == username:
             if user['password'] == decoded_password:
-                token = generate_token(username, decoded_password)
-                user['token'] = token
-                return jsonify({'token': token}), 201
+                return jsonify({'token': generate_token(username, decoded_password)}), 201
             else:
                 abort(403)
     else:
@@ -76,8 +74,8 @@ def get_user_profile():
         abort(400)
 
     for user in users:
-        if 'token' in user and user['token'] == request.args.get('token'):
-            return make_response(jsonify({'email': user['email']}), 201)
+        if is_token_valid(request.args.get('token')):
+            return make_response(jsonify({'email': user['email']}), 200)
 
     return forbidden()
 

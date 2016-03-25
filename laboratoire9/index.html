@@ -4,41 +4,56 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
 
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/js-cookie/src/js.cookie.js"></script>
     <script src="https://cdn.rawgit.com/yckart/jquery.base64.js/master/jquery.base64.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
-    <h1>Connexion</h1>
+    <div class="container">
+        <div id="login">
+            <h1>Connexion</h1>
+            <form id="form" class="form-group form-inline">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control">
 
-    <form id="login">
-        <label for="username">Username</label>
-        <input type="text" id="username">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control">
 
-        <label for="password">Password</label>
-        <input type="password" id="password">
+                <input type="submit" value="Connexion" id="submit" class="btn btn-primary">
+            </form>
+        </div>
 
-        <input type="submit" value="Connexion" id="submit">
-    </form>
+        <div id="profile">
+            <h1>Profile</h1>
+
+            <div>Courriel: <span id="email"></span></div>
+
+            <form id="logout">
+                <input type="submit" value="Deconnexion" class="btn btn-danger">
+            </form>
+        </div>
+    </div>
 
     <script>
-        var api = "http://127.0.0.1:5000/";
-        $('#login').on('submit', function(e) {
-            e.preventDefault();
+        var app = new App({
+            login: 'login',
+            profile: 'profile',
+            api: 'http://127.0.0.1:5000/'
+        });
 
-            $.ajax(api + 'authorize', {
-                data: JSON.stringify({
-                    'username': $('#username').val(),
-                    'password': $.base64.encode($('#password').val())
-                }),
-                contentType : 'application/json',
-                type : 'POST'
-            }).success(function(data) {
-                Cookies.set('token', data.token);
-                window.location = 'profile.html'
-            }).error(function(data) {
-                alert("Erreur dans l'utilisation ou le mot de passe");
-            });
+        app.init();
+
+        $('#form').on('submit', function(e) {
+            e.preventDefault();
+            app.login();
+        });
+
+        $('#logout').on('submit', function(e) {
+            e.preventDefault();
+            app.logout();
         });
     </script>
 </body>
