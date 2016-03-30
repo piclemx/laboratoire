@@ -1,35 +1,36 @@
 $(document).ready(function () {
     var name = 'anonymous';
-    var webSocket = new WebSocket('ws://myWebSocketUrl');
+    var nameForm = $('#name-form');
+    var messages = $('#messages');
+    var messageList = $('#message-list');
+    var messageForm = $('#message-form');
 
-    $('#name-form').submit(function (event) {
+    var socket;
+
+    messages.hide();
+
+    nameForm.submit(function (event) {
+        debugger;
         name = $('#name').val();
+        socket = io('localhost:5000', {'name': name});
+
+        nameForm.hide();
+        messages.show();
+        event.preventDefault();
+
+        socket.on('new message', function (data) {
+            addChatMessage(data);
+        });
+    });
+
+    messageForm.submit(function (event) {
+        var message = $('#message').val();
+        socket.emit('new message', message);
         event.preventDefault();
     });
 
-    $('#message-form').submit(function (event) {
-        var message = {
-            'name': name,
-            'message': $('#text').val()
-        };
-        webSocket.send(message);
-        event.preventDefault();
-    });
-
-    webSocket.onopen = function () {
+    var addChatMessage = function (data) {
         debugger;
-        updateStatus('wsStatus', 'Connected to WebSocket server!');
-    };
-    webSocket.onmessage = function (event) {
-        debugger;
-        displayMessage(event.data);
-    };
-    webSocket.onclose = function () {
-        debugger;
-        updateStatus('wsStatus', 'WebSocket closed!');
-    };
-    webSocket.onerror = function (event) {
-        debugger;
-        updateStatus('wsStatus', 'WebSocket error : ' + event.data);
+        messageList.append('<div></div>');
     };
 });

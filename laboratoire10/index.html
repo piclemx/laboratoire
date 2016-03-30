@@ -6,20 +6,25 @@
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 
+
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
 <div class="container">
     <div>
         <form id="name-form" class="form-group form-inline">
-            <input type="text" id="name" name="name" class="form-control" required value="anonymous"/>
-            <input type="submit" value="Change Name" class="btn btn-primary"/>
+            <input type="text" id="name" name="name" class="form-control" required/>
+            <input type="submit" value="Login" class="btn btn-primary"/>
         </form>
     </div>
 
     <div id="messages">
-        <form id="text-form" class="form-group form-inline">
+        <div id="message-list">
+
+        </div>
+        <form id="message-form" class="form-group form-inline">
             <input type="text" id="message" name="message" class="form-control" required placeholder="Enter your text here"/>
             <input type="submit" value="Submit" class="btn btn-primary"/>
         </form>

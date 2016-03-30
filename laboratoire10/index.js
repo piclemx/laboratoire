@@ -1,21 +1,19 @@
-var express = require('express');
-var http = require('http').Server(express);
+var app = require('express')();
+var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var _ = require('underscore');
 
 var peoples = [];
 
-var labo8 = io.of('/labo8');
-
-
-labo8.on("connection", function(socket) {
+io.on("connection", function(socket) {
   socket.on('join', function(name) {
     peoples[socket.id] = name;
     socket.broadcast.emit('update', 'New user connected ' + name)
   });
 
   socket.on('new message', function(message) {
-    socket.broadcast.emit('new message', {
+    console.log('message: ' + peoples[socket.id] + ' - ' + message);
+    io.emit('new message', {
       name: peoples[socket.id],
       message: message
     });
@@ -43,7 +41,6 @@ labo8.on("connection", function(socket) {
   });
 
 });
-
 
 var port = 5000;
 var server = http.listen(port, function() {
