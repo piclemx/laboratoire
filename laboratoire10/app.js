@@ -9,7 +9,7 @@ io.on("connection", function (socket) {
     socket.on('join', function (name) {
         peoples[socket.id] = name;
         console.log('New user connected ' + name);
-        io.emit('update', 'New user connected ' + name);
+        io.emit('update', name);
     });
 
     socket.on('new message', function (message) {
@@ -20,27 +20,16 @@ io.on("connection", function (socket) {
         });
     });
 
-    socket.on('typing', function () {
-        socket.broadcast.emit('typing', {
-            name: peoples[socket.id]
-        });
-    });
-
-    socket.on('stop typing', function () {
-        socket.broadcast.emit('stop typing', {
-            name: peoples[socket.id]
-        });
-    });
     socket.on('disconnect', function () {
         var name = peoples[socket.id];
+        console.log(name + ' left');
         peoples = _.without(peoples, name);
 
-        socket.broadcast.emit('user left', {
+        io.emit('user left', {
             name: name,
             numUsers: peoples.length
         });
     });
-
 });
 
 var port = 5000;

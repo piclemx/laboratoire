@@ -13,8 +13,5 @@
     "jquery": "^2.2.2",
     "underscore": "^1.8.3",
 	"socket.io": "^1.4.5"
-  },
-  "devDependencies": {
-    "http-server": "^0.8.5"
   }
 }

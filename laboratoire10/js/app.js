@@ -25,13 +25,16 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    socket.on('new message', function (data) {
-        addChatMessage(data);
+    socket.on('update', function (data) {
+        messageList.append('<div>' + data + ' joined!</div><hr/>');
     });
 
-    var addChatMessage = function (data) {
-        debugger;
+    socket.on('new message', function (data) {
         message.val('');
         messageList.append('<div>' + data.name + ' - ' + data.message + '</div><hr/>');
-    };
+    });
+
+    socket.on('user left', function (data) {
+        messageList.append('<div>' + data.name + ' left!</div><hr/>');
+    });
 });
