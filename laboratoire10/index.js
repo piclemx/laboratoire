@@ -1,68 +1,37 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var _ = require('underscore');
+$(document).ready(function () {
+    var name = 'anonymous';
+    var nameForm = $('#name-form');
+    var message = $('#message');
+    var messages = $('#messages');
+    var messageList = $('#message-list');
+    var messageForm = $('#message-form');
 
-var peoples = [];
+    var socket = io('localhost:5000');
 
-io.on("connection", function(socket) {
-  socket.on('join', function(name) {
-    peoples[socket.id] = name;
-    socket.broadcast.emit('update', 'New user connected ' + name)
-  });
+    messages.hide();
 
-  socket.on('new message', function(message) {
-    console.log('message: ' + peoples[socket.id] + ' - ' + message);
-    io.emit('new message', {
-      name: peoples[socket.id],
-      message: message
+    nameForm.submit(function (event) {
+        name = $('#name').val();
+        socket.emit('join', name);
+
+        nameForm.hide();
+        messages.show();
+        event.preventDefault();
     });
-  });
 
-  socket.on('typing', function() {
-    socket.broadcast.emit('typing', {
-      name: peoples[socket.id]
+    messageForm.submit(function (event) {
+        var message = $('#message').val();
+        socket.emit('new message', message);
+        event.preventDefault();
     });
-  });
 
-  socket.on('stop typing', function() {
-    socket.broadcast.emit('stop typing', {
-      name: peoples[socket.id]
+    socket.on('new message', function (data) {
+        addChatMessage(data);
     });
-  });
-  socket.on('disconnect', function() {
-    var name = peoples[socket.id];
-    peoples = _.without(peoples, name);
 
-    socket.broadcast.emit('user left', {
-      name: name,
-      numUsers: peoples.length
-    });
-  });
-
-});
-
-var port = 5000;
-var server = http.listen(port, function() {
-  console.log("Running on port " + port + " localhost");
-  console.log('Hit CTRL-C to stop the server');
-});
-
-if (process.platform === 'win32') {
-  require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  }).on('SIGINT', function() {
-    process.emit('SIGINT');
-  });
-}
-
-process.on('SIGINT', function() {
-  console.log('\nServer stopped.');
-  process.exit();
-});
-
-process.on('SIGTERM', function() {
-  console.log('\nServer stopped.');
-  process.exit();
+    var addChatMessage = function (data) {
+        debugger;
+        message.val('');
+        messageList.append('<div>' + data.name + ' - ' + data.message + '</div><hr/>');
+    };
 });
