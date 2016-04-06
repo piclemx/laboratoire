@@ -4,11 +4,13 @@ var Schema = mongoose.Schema;
 
 
 var simpleUser = new Schema({
+   _type: String,
   name: { type : String , unique : true},
   password: String
 });
 
 var completUser = new Schema({
+   _type: {type: String, default: 'CompleteUser'},
   name: { type : String , unique : true},
   password: String,
   adress: String,
@@ -17,6 +19,7 @@ var completUser = new Schema({
 });
 
 var preferentialUser = new Schema({
+  _type: {type: String, default: 'PreferentialUser'},
   name: { type : String , unique : true},
   password: String,
   question: String,
@@ -29,11 +32,19 @@ simpleUser.method('toJSON', modelHelpers.toJSON);
 completUser.method('toJSON', modelHelpers.toJSON);
 preferentialUser.method('toJSON', modelHelpers.toJSON);
 
-var SimpleUser = mongoose.model('SimpleUser',simpleUser, 'users');
+var Base = mongoose.model('SimpleUser',simpleUser, 'users');
 var CompleteUser = mongoose.model('CompleteUser', completUser, 'users');
 var PreferentialUser = mongoose.model('PreferentialUser', preferentialUser, 'users');
 
-exports.schema = taskSchema;
-exports.SimpleUser = SimpleUser;
-exports.CompleteUser = CompleteUser;
-exports.PreferentialUser = PreferentialUser;
+exports.Base = Base;
+Base.CompleteUser = CompleteUser;
+Base.PreferentialUser = PreferentialUser;
+
+var init = Base.prototype.init;
+init.CompleteUser = new Base.CompleteUser().__proto__;
+init.PreferentialUser = new Base.PreferentialUser().__proto__;
+Base.prototype.init = function (doc, fn) {
+  var obj = init.apply(this,arguments);
+  obj.__proto__ = init[doc._type];
+  return obj;
+};

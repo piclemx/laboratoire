@@ -1,6 +1,6 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
-    tasks = require('./routes/users'),
+    users = require('./routes/users'),
     cors = require('cors'),
     morgan = require('morgan'),
     mongoose = require('mongoose');
@@ -21,11 +21,11 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(morgan('dev'));
 
-app.get('/tasks', tasks.getTasks);
-app.get('/tasks/:id', tasks.getTaskById);
-app.post('/tasks', tasks.createTask);
-app.put('/tasks/:id', tasks.updateTask);
-app.delete('/tasks/:id', tasks.deleteTask);
+app.get('/users', users.getUsers);
+app.get('/users/:id', users.getUser);
+app.post('/users', users.addUser);
+app.put('/users/:id', users.updateUser);
+app.delete('/users/:id', users.deleteUser);
 
 
 var port = 5000;
@@ -52,5 +52,3 @@ process.on('SIGTERM', function () {
   console.log('\nServer stopped.');
   process.exit();
 });
-Status API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Contact Help
