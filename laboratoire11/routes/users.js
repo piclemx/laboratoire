@@ -26,40 +26,41 @@ exports.getUser = function(req, res) {
 };
 
 exports.addUser = function(req, res) {
+  console.log("Test");
   if (_.isUndefined(req.body) || !_.has(req.body, 'name') || !_.has(req.body, 'password')) {
     badRequest(req, res);
-  }
-
-  var userToCreate;
-  if (isCompleteUser(req.body)) {
-    userToCreate = new User.CompleteUser({
-      name: req.body.name,
-      password: req.body.password,
-      adress: req.body.adress,
-      phoneNumber: req.body.phoneNumber,
-      email: req.body.email
-    });
-  } else if (isPreferentialUser(req.body)) {
-    userToCreate = new User.PreferentialUser({
-      name: req.body.name,
-      password: req.body.password,
-      question: req.body.question,
-      answer: req.body.question
-    });
   } else {
-    userToCreate = new User({
-      name: req.body.name,
-      password: req.body.password
+    var userToCreate;
+    if (isCompleteUser(req.body)) {
+      userToCreate = new User.CompleteUser({
+        name: req.body.name,
+        password: req.body.password,
+        adress: req.body.adress,
+        phoneNumber: req.body.phoneNumber,
+        email: req.body.email
+      });
+    } else if (isPreferentialUser(req.body)) {
+      userToCreate = new User.PreferentialUser({
+        name: req.body.name,
+        password: req.body.password,
+        question: req.body.question,
+        answer: req.body.question
+      });
+    } else {
+      userToCreate = new User({
+        name: req.body.name,
+        password: req.body.password
+      });
+    }
+    console.log("userToCreate :" + userToCreate);
+    userToCreate.save(function(err) {
+      if (!err) {
+        res.status(201).send(userToCreate);
+      } else {
+        console.log(err);
+      }
     });
   }
-
-  userToCreate.save(function(err) {
-    if (!err) {
-      res.status(201).send(userToCreate);
-    } else {
-      console.log(err);
-    }
-  });
 };
 
 exports.updateUser = function(req, res) {
