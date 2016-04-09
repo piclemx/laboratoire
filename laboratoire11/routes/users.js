@@ -26,7 +26,6 @@ exports.getUser = function(req, res) {
 };
 
 exports.addUser = function(req, res) {
-  console.log("Test");
   if (_.isUndefined(req.body) || !_.has(req.body, 'name') || !_.has(req.body, 'password')) {
     badRequest(req, res);
   } else {
@@ -52,7 +51,6 @@ exports.addUser = function(req, res) {
         password: req.body.password
       });
     }
-    console.log("userToCreate :" + userToCreate);
     userToCreate.save(function(err) {
       if (!err) {
         res.status(201).send(userToCreate);
