@@ -4,23 +4,23 @@ var Schema = mongoose.Schema;
 
 
 var simpleUser = new Schema({
-   _type: String,
-  name: { type : String , unique : true},
+  _type: String,
+  name: { type : String },
   password: String
 });
 
 var completUser = new Schema({
-   _type: {type: String, default: 'CompleteUser'},
-  name: { type : String , unique : true},
+  _type: {type: String, default: 'CompleteUser'},
+  name: { type : String },
   password: String,
-  adress: String,
-  phoneNumber: Number,
+  address: String,
+  phoneNumber: String,
   email: String
 });
 
 var preferentialUser = new Schema({
   _type: {type: String, default: 'PreferentialUser'},
-  name: { type : String , unique : true},
+  name: { type : String },
   password: String,
   question: String,
   answer: String

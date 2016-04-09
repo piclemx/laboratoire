@@ -5,7 +5,7 @@ var express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose');
 
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/labo11';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/laboratoire11';
 mongoose.connect(mongoUri);
 var app = express();
 var corsOptions = {

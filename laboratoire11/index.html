@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab #11</title>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Lab #11</h1>
+        <div id="user-add">
+            <h2>New user</h2>
+            <label for="userType">User type</label>
+            <select name="userType" id="userType" v-model="newUser.userType" class="form-control">
+                <option value="simple">Simple</option>
+                <option value="preferential">Preferential</option>
+                <option value="complete">Complete</option>
+            </select>
+            <br>
+
+            <label for="name">Name</label>
+            <input type="text" v-model="newUser.name" id="name" class="form-control"><br>
+
+            <label for="password">Password</label>
+            <input type="password" v-model="newUser.password" id="password" class="form-control">
+
+            <div v-show="newUser.userType == 'complete'">
+                <label for="address">Address</label>
+                <input type="text" v-model="newUser.address" id="address" class="form-control">
+
+                <label for="phoneNumber">Phone number</label>
+                <input type="text" v-model="newUser.phoneNumber" id="phoneNumber" class="form-control">
+
+                <label for="email">Email</label>
+                <input type="email" v-model="newUser.email" id="email" class="form-control">
+            </div>
+
+            <div v-show="newUser.userType == 'preferential'">
+                <label for="question">Question</label>
+                <input type="text" v-model="newUser.question" id="question" class="form-control">
+
+                <label for="answer">Answer</label>
+                <input type="text" v-model="newUser.answer" id="answer" class="form-control">
+            </div>
+
+            <br>
+            <button @click="addUser" class="btn btn-primary">Add</button>
+        </div>
+
+        <div id="user-edit" v-show="userInEdition">
+            <h2>Edit user</h2>
+
+            <label for="editName">Name</label>
+            <input type="text" v-model="userInEdition.name" id="editName" class="form-control">
+
+            <label for="editPassword">Password</label>
+            <input type="password" v-model="userInEdition.password" id="editPassword" class="form-control">
+
+            <div v-show="userInEdition._type == 'CompleteUser'">
+                <label for="editAddress">Address</label>
+                <input type="text" v-model="userInEdition.address" id="editAddress" class="form-control">
+
+                <label for="editPhoneNumber">Phone number</label>
+                <input type="text" v-model="userInEdition.phoneNumber" id="editPhoneNumber" class="form-control">
+
+                <label for="editEmail">Email</label>
+                <input type="email" v-model="userInEdition.email" id="editEmail" class="form-control">
+            </div>
+
+            <div v-show="userInEdition._type == 'PreferentialUser'">
+                <label for="editQuestion">Question</label>
+                <input type="text" v-model="userInEdition.question" id="editQuestion" class="form-control">
+
+                <label for="editAnswer">Answer</label>
+                <input type="text" v-model="userInEdition.answer" id="editAnswer" class="form-control">
+            </div>
+
+            <br>
+
+            <button @click="editUser(userInEdition.id)" class="btn btn-primary">Edit</button>
+        </div>
+        <div id="user-list">
+            <h2>Users list</h2>
+            <ul class="list-group">
+                <li v-for="user in users" class="list-group-item">
+                    <p>Name: {{ user.name }}</p>
+                    <p v-show="user.address">Address: {{ user.address }}</p>
+                    <p v-show="user.phoneNumber">Phone number: {{ user.phoneNumber }}</p>
+                    <p v-show="user.email">Email: {{ user.email }}</p>
+                    <p v-show="user.question">Question: {{ user.question }}</p>
+                    <p v-show="user.answer">Answer: {{ user.answer }}</p>
+                    <button @click="startEditUser(user.id)" class="btn btn-primary">Edit</button>
+                    <button @click="deleteUser(user.id)" class="btn btn-danger">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    new Vue({
+        el: '#app',
+        ready: function() {
+            this.refreshUsersList();
+        },
+        data: {
+            users: [],
+            newUser: {
+                userType: "simple",
+                name: "",
+                password: "",
+                address: "",
+                phoneNumber: "",
+                email: "",
+                question: "",
+                answer: ""
+            },
+            userInEdition: null
+        },
+        methods: {
+            addUser: function() {
+                $.ajax('http://localhost:5000/users', {
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        name: this.newUser.name,
+                        password: this.newUser.password,
+                        address: this.newUser.address,
+                        phoneNumber: this.newUser.phoneNumber,
+                        email: this.newUser.email,
+                        question: this.newUser.question,
+                        answer: this.newUser.answer
+                    }
+                });
+                $('#user-add input').val("");
+                this.refreshUsersList();
+            },
+            startEditUser: function(id) {
+                var self = this;
+                $.ajax('http://localhost:5000/users/' + id, {
+                    type: 'GET'
+                }).success(function(data) {
+                    self.$set('userInEdition', data.user);
+                });
+            },
+            editUser: function(id) {
+                var self = this;
+                $.ajax('http://localhost:5000/users/' + id, {
+                    type: 'PUT',
+                    data: this.userInEdition
+                }).success(function() {
+                    self.refreshUsersList();
+                });
+            },
+            deleteUser: function(id) {
+                var self = this;
+                $.ajax('http://localhost:5000/users/' + id, {
+                    type: 'DELETE'
+                }).success(function() {
+                    self.refreshUsersList();
+                });
+            },
+            refreshUsersList: function() {
+                var self = this;
+                $.ajax('http://localhost:5000/users', {
+                    type: 'GET',
+                    dateType: 'json'
+                }).success(function(data) {
+                    self.$set('users', data);
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

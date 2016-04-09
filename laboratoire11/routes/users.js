@@ -35,7 +35,7 @@ exports.addUser = function(req, res) {
       userToCreate = new User.CompleteUser({
         name: req.body.name,
         password: req.body.password,
-        adress: req.body.adress,
+        address: req.body.address,
         phoneNumber: req.body.phoneNumber,
         email: req.body.email
       });
@@ -69,26 +69,29 @@ exports.updateUser = function(req, res) {
     badRequest(req, res);
   }
 
-  var fieldToUpdate;
-
-
   User.findById(req.params.id, function(err, user) {
     if (err) {
       notFound(req, res);
     }
+
+    console.log(user);
+
+    user.name = req.body.name;
 
     if (isPreferentialUser(req.body)) {
       user.question = req.body.question;
       user.answer = req.body.answer;
     } else if (isCompleteUser(req.body)) {
       user.email = req.body.email;
-      user.adress = req.body.adress;
+      user.address = req.body.address;
       user.phoneNumber = req.body.phoneNumber;
     }
 
     if (_.has(req.body, 'password')) {
       user.password = req.body.password;
     }
+
+    console.log(user);
 
     user.save();
 
@@ -121,10 +124,13 @@ function notFound(req, res) {
 }
 
 function isCompleteUser(object) {
-  return _.has(object, 'email') && _.has(object, 'adress') && _.has(object, 'phoneNumber');
+  return _.has(object, 'email') && !_.isEmpty(object.email) &&
+      _.has(object, 'address') && !_.isEmpty(object.address) &&
+      _.has(object, 'phoneNumber') && !_.isEmpty(object.phoneNumber);
 }
 
 
 function isPreferentialUser(object) {
-  return _.has(object, 'question') && _.has(object, 'answer');
+  return _.has(object, 'question') && !_.isEmpty(object.question) &&
+      _.has(object, 'answer') && !_.isEmpty(object.answer);
 }
